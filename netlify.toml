@@ -1,0 +1,28 @@
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[build.environment]
+  # Map environment variables for functions
+  STRIPE_SECRET_KEY = "${VITE_STRIPE_SECRET_KEY}"
+  STRIPE_PUBLISHABLE_KEY = "${VITE_STRIPE_PUBLISHABLE_KEY}"
+  STRIPE_CLIENT_ID = "${VITE_STRIPE_CLIENT_ID}"
+  APP_URL = "${VITE_APP_URL}"
+  SUPABASE_URL = "${VITE_SUPABASE_URL}"
+  SUPABASE_ANON_KEY = "${VITE_SUPABASE_ANON_KEY}"
+  GOOGLE_MAPS_API_KEY = "${VITE_GOOGLE_MAPS_API_KEY}"
+  MIXPANEL_TOKEN = "${VITE_MIXPANEL_TOKEN}"
